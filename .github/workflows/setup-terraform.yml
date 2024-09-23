@@ -106,7 +106,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     env:
-      TF_CLOUD_API_TOKEN: 'sd17rWSmAfI08Q.atlasv1.INfXsJvycyMvGBSHcoAc5GHtz0mXSwhNwzRbZ2fcZ4Gfx33uXRgqoye7a0XrFzzdl0M'
+      TF_API_TOKEN: 'sd17rWSmAfI08Q.atlasv1.INfXsJvycyMvGBSHcoAc5GHtz0mXSwhNwzRbZ2fcZ4Gfx33uXRgqoye7a0XrFzzdl0M'
       TF_WORKSPACE: "learn-terraform-github-actions"
       TF_CLOUD_ORGANIZATION: "dimpy_test"
       CONFIG_DIRECTORY: "./"
@@ -117,19 +117,19 @@ jobs:
     - name: Setup Terraform
       uses: ./
       with:
-        cli_config_credentials_token: ${{ env.TF_CLOUD_API_TOKEN }}
+        cli_config_credentials_token: ${{ env.TF_API_TOKEN }}
 
     - name: Validate Terraform Credentials (Windows)
       if: runner.os == 'Windows'
       run: |
         cat ${APPDATA}/terraform.rc | grep 'credentials "app.terraform.io"'
-        cat ${APPDATA}/terraform.rc | grep 'token = "${{ env.TF_CLOUD_API_TOKEN }}"'
+        cat ${APPDATA}/terraform.rc | grep 'token = "${{ env.TF_API_TOKEN }}"'
 
     - name: Validate Teraform Credentials (Linux & macOS)
       if: runner.os != 'Windows'
       run: |
         cat ${HOME}/.terraformrc | grep 'credentials "app.terraform.io"'
-        cat ${HOME}/.terraformrc | grep 'token = "${{ env.TF_CLOUD_API_TOKEN }}"'
+        cat ${HOME}/.terraformrc | grep 'token = "${{ env.TF_API_TOKEN }}"'
 
   terraform-credentials-enterprise:
     name: 'Terraform Enterprise Credentials'
@@ -138,7 +138,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     env:
-      TF_CLOUD_API_TOKEN: 'sd17rWSmAfI08Q.atlasv1.INfXsJvycyMvGBSHcoAc5GHtz0mXSwhNwzRbZ2fcZ4Gfx33uXRgqoye7a0XrFzzdl0M'
+      TF_API_TOKEN: 'sd17rWSmAfI08Q.atlasv1.INfXsJvycyMvGBSHcoAc5GHtz0mXSwhNwzRbZ2fcZ4Gfx33uXRgqoye7a0XrFzzdl0M'
     steps:
     - name: Checkout
       uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -147,19 +147,19 @@ jobs:
       uses: ./
       with:
         cli_config_credentials_hostname: 'terraform.example.com'
-        cli_config_credentials_token: ${{ env.TF_CLOUD_API_TOKEN }}
+        cli_config_credentials_token: ${{ env.TF_API_TOKEN }}
 
     - name: Validate Terraform Credentials (Windows)
       if: runner.os == 'Windows'
       run: |
         cat ${APPDATA}/terraform.rc | grep 'credentials "terraform.example.com"'
-        cat ${APPDATA}/terraform.rc | grep 'token = "${{ env.TF_CLOUD_API_TOKEN }}"'
+        cat ${APPDATA}/terraform.rc | grep 'token = "${{ env.TF_API_TOKEN }}"'
 
     - name: Validate Teraform Credentials (Linux & macOS)
       if: runner.os != 'Windows'
       run: |
         cat ${HOME}/.terraformrc | grep 'credentials "terraform.example.com"'
-        cat ${HOME}/.terraformrc | grep 'token = "${{ env.TF_CLOUD_API_TOKEN }}"'
+        cat ${HOME}/.terraformrc | grep 'token = "${{ env.TF_API_TOKEN }}"'
 
   terraform-credentials-none:
     name: 'Terraform No Credentials'
