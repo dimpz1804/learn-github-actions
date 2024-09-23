@@ -9,13 +9,3 @@ resource "time_sleep" "wait_30_seconds" {
 resource "null_resource" "next" {
   depends_on = [time_sleep.wait_30_seconds]
 }
-terraform { 
-  cloud { 
-    
-    organization = "dimpy_test" 
-
-    workspaces { 
-      name = "learn-terraform-github-actions" 
-    } 
-  } 
-}
