@@ -107,6 +107,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     env:
       TF_CLOUD_API_TOKEN: 'sd17rWSmAfI08Q.atlasv1.INfXsJvycyMvGBSHcoAc5GHtz0mXSwhNwzRbZ2fcZ4Gfx33uXRgqoye7a0XrFzzdl0M'
+      TF_WORKSPACE: "learn-terraform-github-actions"
+      TF_CLOUD_ORGANIZATION: "dimpy_test"
+      CONFIG_DIRECTORY: "./"
     steps:
     - name: Checkout
       uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
